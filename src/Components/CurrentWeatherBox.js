@@ -11,30 +11,64 @@ import {
 	WiTime12,
 	WiHumidity,
 	WiStrongWind,
+	WiDaySunnyOvercast,
 } from "react-icons/wi";
 
 const getWeatherIcon = (description, size, className) => {
 	switch (description) {
 		case "clear sky":
 			return <WiDaySunny size={size} className={`${className}`} />;
-		case "few clouds":
+		case ("few clouds", "scattered clouds", "broken clouds", "overcast clouds"):
 			return <WiCloudy size={size} className={`${className}`} />;
-		case "scattered clouds":
-			return <WiCloudy size={size} className={`${className}`} />;
-		case "broken clouds":
-			return <WiCloudy size={size} className={`${className}`} />;
-		case "shower rain":
+		case ("shower rain",
+		"light intensity drizzle",
+		"drizzle",
+		"heavy intensity drizzle",
+		"light intensity drizzle rain",
+		"drizzle rain",
+		"heavy intensity drizzle rain",
+		"shower rain and drizzle",
+		"heavy shower rain and drizzle",
+		"shower drizzle"):
 			return <WiShowers size={size} className={`${className}`} />;
-		case "rain":
+		case ("rain",
+		"light rain",
+		"moderate rain",
+		"heavy intensity rain",
+		"very heavy rain",
+		"extreme rain",
+		"freezing rain",
+		"light intensity shower rain",
+		"heavy intensity shower rain",
+		"ragged shower rain"):
 			return <WiRain size={size} className={`${className}`} />;
-		case "thunderstorm":
+		case ("thunderstorm",
+		"thunderstorm with light rain",
+		"thunderstorm with rain",
+		"thunderstorm with heavy rain",
+		"light thunderstorm",
+		"heavy thunderstorm",
+		"ragged thunderstorm",
+		"thunderstorm with light drizzle",
+		"thunderstorm with drizzle",
+		"thunderstorm with heavy drizzle"):
 			return <WiThunderstorm size={size} className={`${className}`} />;
-		case "snow":
+		case ("Snow",
+		"light snow",
+		"Heavy snow",
+		"Sleet",
+		"Light shower sleet",
+		"Shower sleet",
+		"Light rain and snow",
+		"Rain and snow",
+		"Light shower snow",
+		"Shower snow",
+		"Heavy shower snow"):
 			return <WiSnow size={size} className={`${className}`} />;
-		case "mist":
+		case ("mist", "Smoke", "Haze", "fog", "sand", "dust", "volcanic ash", "squalls", "tornado"):
 			return <WiCloud size={size} className={`${className}`} />;
 		default:
-			break;
+			return <WiDaySunnyOvercast size={size} className={`${className}`} />;
 	}
 };
 const CurrentWeatherBox = ({ data }) => {
