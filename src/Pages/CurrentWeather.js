@@ -17,6 +17,10 @@ const CurrentWeather = () => {
 			appid: process.env.REACT_APP_OPEN_WEATHER_API,
 		},
 	});
+	const [environment, setEnvironment] = useState("");
+	const handleEnvironment = (string) => {
+		setEnvironment(string);
+	};
 	const trigger = (event) => {
 		if (event.key === "Enter") {
 			setOption({ params: { q: search, units: "metric", appid: process.env.REACT_APP_OPEN_WEATHER_API } });
@@ -25,7 +29,7 @@ const CurrentWeather = () => {
 	var { data, isPending, error } = useAxios("https://api.openweathermap.org/data/2.5/weather", option);
 
 	return (
-		<div className="w-full min-h-full p-3 space-y-20">
+		<div className={classNames(`${environment}`, "w-full min-h-screen p-3 space-y-20 ")}>
 			<div className="flex justify-center ">
 				<div className="relative flex justify-center p-3 bg-gray-300 rounded-md shadow-xl md:w-1/5 ">
 					<input
@@ -46,7 +50,7 @@ const CurrentWeather = () => {
 
 			{error && <div> {error.message} </div>}
 			{isPending && <Loading />}
-			{data && <CurrentWeatherBox data={data} />}
+			{data && <CurrentWeatherBox data={data} handleEnvironment={handleEnvironment} />}
 		</div>
 	);
 };
