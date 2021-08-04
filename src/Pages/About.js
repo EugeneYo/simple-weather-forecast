@@ -12,6 +12,7 @@ const About = () => {
 	// 		<button onClick={() => fetchGif(tag)}>Click Me to change</button>
 	// 	</div>
 	// );
+	return <div> About Page </div>;
 };
 
 export default About;

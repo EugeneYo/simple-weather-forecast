@@ -29,6 +29,7 @@ const CurrentWeather = () => {
 
 	return (
 		<div className={classNames(`${environment}`, "w-full min-h-screen p-3 space-y-20 ")}>
+			{/* <div className={"w-full min-h-screen p-3 space-y-20 dark:bg-red-600 "}> */}
 			<div className="flex justify-center ">
 				<div className="relative flex justify-center p-3 bg-gray-300 rounded-md shadow-xl ">
 					<input
