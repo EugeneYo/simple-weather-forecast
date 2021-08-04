@@ -195,7 +195,7 @@ const CurrentWeatherBox = ({ data, handleEnvironment }) => {
 				{/* Showing the details */}
 				<div className="grid grid-cols-2 gap-4 ">
 					{details.map((each) => (
-						<div className="flex flex-col items-center justify-between">
+						<div key={each.property} className="flex flex-col items-center justify-between">
 							<div className="flex flex-col items-center justify-start">
 								{each.icon}
 								<div>{each.property}</div>
