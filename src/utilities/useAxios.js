@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { ReplyIcon } from "@heroicons/react/solid";
 
 const API_KEY = process.env.REACT_APP_OPEN_WEATHER_API;
 
@@ -30,29 +31,62 @@ const useAxios = (options, location) => {
 			setResult(null);
 			console.log(e.response);
 			setIsPending(false);
-			setError({
-				statusCode: e.response.data.cod,
-				message: e.response.data.message,
-			});
+
+			if (e.response) {
+				setError({
+					statusCode: e.response.data.cod,
+					message: e.response.data.message,
+				});
+			} else {
+				setError({
+					statusCode: 404,
+					message: "not online",
+				});
+			}
 		}
 	};
 
 	const getSevenDaysWeather = async (location) => {
 		try {
-			const { data } = await axios.get("https://api.openweathermap.org/data/2.5/onecall", {
+			const response = await axios.get("https://api.openweathermap.org/data/2.5/weather", {
 				params: {
 					q: location,
 					units: "metric",
 					appid: API_KEY,
 				},
 			});
+			console.log(response.data);
+			const { data } = await axios.get("https://api.openweathermap.org/data/2.5/onecall", {
+				params: {
+					lat: response.data.coord.lat,
+					lon: response.data.coord.lon,
+					units: "metric",
+					exclude: "current,minutely,hourly,alerts",
+					appid: API_KEY,
+				},
+			});
+			data["state"] = response.data.name;
+			data["country"] = response.data.sys.country;
 			setResult(data);
-			// setIsPending(false);
-			// setError(null);
+			console.log(data);
+			setIsPending(false);
+			setError(null);
 		} catch (e) {
-			// setError(e);
-			// setIsPending(false);
-			// console.log(e);
+			setResult(null);
+			console.log(e.response);
+			setIsPending(false);
+
+			if (e.response) {
+				setError({
+					statusCode: e.response.data.cod,
+					message: e.response.data.message,
+				});
+			} else {
+				setError({
+					statusCode: 404,
+					message: "not online",
+				});
+			}
 		}
 	};
 
@@ -75,8 +109,14 @@ const useAxios = (options, location) => {
 		}, 1500);
 
 		console.log("Getting Request");
+		return () => {
+			console.log("reset");
+			setResult(null);
+			setIsPending(true);
+			setError(null);
+		};
 	}, [location]);
-	return { result, isPending, error, initiateSearch };
+	return { result, isPending, error };
 };
 
 export default useAxios;

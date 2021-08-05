@@ -1,12 +1,13 @@
-import useAxios from "../utilities/useAxios";
-import { useEffect, useState } from "react";
 import { SearchIcon } from "@heroicons/react/outline";
-import CurrentWeatherBox from "../Components/CurrentWeatherBox";
+import React, { useState } from "react";
 import Loading from "../Components/Loading";
 import Error from "../Components/Error";
 import { classNames } from "../utilities/utilities";
 
-const CurrentWeather = () => {
+import useAxios from "../utilities/useAxios";
+import SevenWeatherBox from "../Components/SevenWeatherBox";
+
+const SevenDaysWeather = () => {
 	const [search, setSearch] = useState("");
 	const [location, setLocation] = useState("Penang");
 	const [environment, setEnvironment] = useState("");
@@ -14,12 +15,10 @@ const CurrentWeather = () => {
 		setEnvironment(string);
 	};
 	const searching = () => {
-		// initiateSearch();
 		setLocation(search);
 		setSearch("");
 	};
-	var { result, isPending, error } = useAxios("current", location);
-
+	var { result, isPending, error } = useAxios("", location);
 	return (
 		<div className={classNames(`${environment}`, "w-full min-h-screen p-3 space-y-20 dark:bg-gradient-to-bl dark:from-[#263549] dark:to-[#263549] ")}>
 			{/* <div className={"w-full min-h-screen p-3 space-y-20 dark:bg-red-600 "}> */}
@@ -39,10 +38,10 @@ const CurrentWeather = () => {
 				</div>
 			</div>
 			{isPending && <Loading />}
-			{result && <CurrentWeatherBox data={result} handleEnvironment={handleEnvironment} />}
+			{result && <SevenWeatherBox data={result} handleEnvironment={handleEnvironment} />}
 			{error && <Error error={error} />}
 		</div>
 	);
 };
 
-export default CurrentWeather;
+export default SevenDaysWeather;

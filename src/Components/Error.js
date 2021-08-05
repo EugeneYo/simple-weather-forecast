@@ -13,7 +13,7 @@ const Error = ({ error }) => {
 					<div className="absolute w-full h-3 border-t-2 border-white "></div>
 					<div className="absolute p-2 -translate-x-1/2 -translate-y-1/2 bg-gray-800 top-1/2 left-1/2">Error Message</div>
 				</div>
-				<div className="text-3xl text-center">{error.message}</div>
+				<div className="text-3xl text-center first-letter:uppercase">{error.message}</div>
 			</div>
 		</div>
 	);
