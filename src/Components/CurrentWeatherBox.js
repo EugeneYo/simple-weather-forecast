@@ -1,4 +1,4 @@
-import { WiThermometerExterior, WiThermometer, WiTime12, WiHumidity, WiStrongWind, WiSunrise, WiSunset } from "react-icons/wi";
+import { WiThermometerExterior, WiThermometer, WiTime12, WiHumidity, WiStrongWind, WiSunrise, WiSunset, WiDayCloudy } from "react-icons/wi";
 import { useState, useEffect } from "react";
 import { convert_Unix_UTC_to_Local, getWeatherIcon } from "../utilities/utilities";
 
