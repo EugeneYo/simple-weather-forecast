@@ -35,7 +35,7 @@ const SevenWeatherBox = ({ data, handleEnvironment }) => {
 				</div>
 				<div className="grid gap-4 sm:grid-cols-2">
 					{data.daily.map((weather) => (
-						<WeatherBox data={weather} />
+						<WeatherBox key={weather.sunrise} data={weather} />
 					))}
 				</div>
 			</div>
